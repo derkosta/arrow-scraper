@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv
+exports/*.csv
+exports/*.json
+.DS_Store
+arrow_*.csv
+arrow_*.json
+.pytest_cache/
+.coverage
+htmlcov/

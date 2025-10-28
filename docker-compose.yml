@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  arrow-scraper:
+    build: .
+    container_name: arrow-scraper
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      # Persistiere exportierte CSV-Dateien
+      - ./exports:/app/exports
+    environment:
+      - FLASK_ENV=production
+    # Healthcheck wird im Dockerfile definiert
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
