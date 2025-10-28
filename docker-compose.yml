@@ -13,7 +13,6 @@ services:
     volumes:
       - /volume1/docker/arrow_scraper/data/exports:/app/exports
       - /volume1/docker/arrow_scraper/data/logs:/app/logs
-      - /volume1/docker/arrow_scraper/data/.env:/app/.env:ro
 
     environment:
       - DATABASE_PATH=/app/data/arrow_scraper.db
