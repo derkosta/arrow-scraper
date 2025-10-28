@@ -8,6 +8,11 @@ venv/
 .venv
 exports/*.csv
 exports/*.json
+data/exports/*
+data/logs/*
+data/.env
+!data/exports/.gitkeep
+!data/logs/.gitkeep
 .DS_Store
 arrow_*.csv
 arrow_*.json

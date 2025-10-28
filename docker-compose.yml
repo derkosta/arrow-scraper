@@ -2,20 +2,37 @@ version: '3.8'
 
 services:
   arrow-scraper:
-    build: .
+    build:
+      context: .
     container_name: arrow-scraper
     restart: unless-stopped
+
     ports:
-      - "5000:5000"
+      - "5060:5000"
+
     volumes:
-      # Persistiere exportierte CSV-Dateien
-      - ./exports:/app/exports
+      - /volume1/docker/arrow_scraper/data/exports:/app/exports
+      - /volume1/docker/arrow_scraper/data/logs:/app/logs
+      - /volume1/docker/arrow_scraper/data/.env:/app/.env:ro
+
     environment:
+      - DATABASE_PATH=/app/data/arrow_scraper.db
+      - LOG_FILE=/app/logs/arrow_scraper.log
+      - LOG_LEVEL=INFO
+      - TZ=Europe/Berlin
+      - WEB_HOST=0.0.0.0
+      - WEB_PORT=5000
       - FLASK_ENV=production
-    # Healthcheck wird im Dockerfile definiert
+      - DEBUG=false
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
+
+    labels:
+      - "com.docker.compose.project=arrow-scraper"
+      - "com.docker.compose.service=arrow-scraper"
+      - "description=Arrow.it Scraper - Produktdaten-Extraktor für Arrow.it"
