@@ -36,3 +36,4 @@ echo "   docker-compose down"
 echo ""
 echo "📋 Container Status:"
 docker-compose ps
+

@@ -141,3 +141,4 @@ Write-Host "3. Öffnen Sie ein neues PowerShell-Fenster" -ForegroundColor White
 Write-Host "4. Prüfen Sie die Installation: docker --version" -ForegroundColor White
 Write-Host ""
 pause
+
