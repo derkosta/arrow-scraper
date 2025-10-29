@@ -26,10 +26,8 @@ COPY templates/ ./templates/
 # Verzeichnisse erstellen
 RUN mkdir -p exports logs data
 
-# Benutzer für Sicherheit erstellen
-RUN groupadd -r appuser && useradd -r -g appuser appuser \
-    && chown -R appuser:appuser /app
-USER appuser
+# Berechtigungen für gemountete Volumes setzen
+RUN chmod 755 exports logs data
 
 # Port exponieren
 EXPOSE 5000

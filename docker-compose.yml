@@ -15,6 +15,7 @@ services:
       - /volume1/docker/arrow_scraper/data/exports:/app/exports
       - /volume1/docker/arrow_scraper/data/logs:/app/logs
       - /volume1/docker/arrow_scraper/data:/app/data
+    user: "1000:1000"
 
 
     environment:
