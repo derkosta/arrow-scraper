@@ -55,7 +55,11 @@ chmod 755 "$BASE_PATH/data/logs"
 # 3. .env-Datei erstellen falls nicht vorhanden
 if [ ! -f "$BASE_PATH/.env" ]; then
     log_info "Erstelle .env-Datei..."
-    cat > "$BASE_PATH/.env" << EOF
+    if [ -f "$BASE_PATH/env.example" ]; then
+        cp "$BASE_PATH/env.example" "$BASE_PATH/.env"
+        log_info ".env-Datei aus env.example erstellt"
+    else
+        cat > "$BASE_PATH/.env" << EOF
 # Arrow Scraper Environment Configuration
 # Synology DSM Docker Stack Configuration
 
