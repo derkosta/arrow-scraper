@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "5060:5000"
+      - "8080:5000"
 
     volumes:
       - /volume1/docker/arrow_scraper/data/exports:/app/exports

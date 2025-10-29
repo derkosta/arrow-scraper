@@ -6,7 +6,7 @@ Dieses Repository enthält einen vollständig konfigurierten Arrow.it Produktdat
 ## Voraussetzungen
 - Synology NAS mit DSM 7.0 oder höher
 - Docker Package installiert
-- Port 5060 verfügbar
+- Port 8080 verfügbar
 
 ## Installation auf Synology DSM
 
@@ -92,8 +92,8 @@ REQUEST_DELAY=0.3
 
 ### Web-Interface
 Nach dem Start ist die Anwendung verfügbar unter:
-- **URL**: `http://your-synology-ip:5060`
-- **Health Check**: `http://your-synology-ip:5060/api/health`
+- **URL**: `http://your-synology-ip:8080`
+- **Health Check**: `http://your-synology-ip:8080/api/health`
 
 ### API-Endpunkte
 - `POST /api/extract` - Produktdaten extrahieren
@@ -102,7 +102,7 @@ Nach dem Start ist die Anwendung verfügbar unter:
 
 ### Beispiel-API-Aufruf
 ```bash
-curl -X POST http://your-synology-ip:5060/api/extract \
+curl -X POST http://your-synology-ip:8080/api/extract \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://www.arrow.it/en/assembled/1749/Honda-CRF-300-L-2021-2024",
@@ -166,7 +166,7 @@ find /volume1/docker/arrow_scraper/data/logs -name "*.log" -mtime +30 -delete
 ## Sicherheit
 
 ### Firewall
-- Port 5060 nur für interne Netzwerke freigeben
+- Port 8080 nur für interne Netzwerke freigeben
 - Reverse Proxy mit SSL empfohlen
 
 ### Updates

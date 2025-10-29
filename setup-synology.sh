@@ -116,9 +116,9 @@ if [ ! -f "$BASE_PATH/docker-compose.yml" ]; then
     exit 1
 fi
 
-# 5. Port 5060 prüfen
-if netstat -tulpn 2>/dev/null | grep -q ":5060 "; then
-    log_warn "Port 5060 ist bereits in Verwendung"
+# 5. Port 8080 prüfen
+if netstat -tulpn 2>/dev/null | grep -q ":8080 "; then
+    log_warn "Port 8080 ist bereits in Verwendung"
     log_warn "Bitte anderen Port in docker-compose.yml konfigurieren"
 fi
 
@@ -135,8 +135,8 @@ docker-compose up -d --build
 sleep 10
 if docker ps | grep -q "$PROJECT_NAME"; then
     log_info "✅ Container erfolgreich gestartet!"
-    log_info "🌐 Web-Interface: http://$(hostname -I | awk '{print $1}'):5060"
-    log_info "🔍 Health Check: http://$(hostname -I | awk '{print $1}'):5060/api/health"
+    log_info "🌐 Web-Interface: http://$(hostname -I | awk '{print $1}'):8080"
+    log_info "🔍 Health Check: http://$(hostname -I | awk '{print $1}'):8080/api/health"
 else
     log_error "❌ Container konnte nicht gestartet werden"
     log_error "Logs anzeigen mit: docker logs $PROJECT_NAME"
