@@ -1,27 +1,42 @@
 FROM python:3.11-slim
 
+# Metadaten
+LABEL maintainer="Arrow Scraper"
+LABEL description="Arrow.it Produktdaten-Extraktor"
+LABEL version="1.0.0"
+
+# Arbeitsverzeichnis
 WORKDIR /app
 
-# Installiere curl für Healthcheck
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# System-Abhängigkeiten installieren
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
-# Installiere Abhängigkeiten
+# Python-Abhängigkeiten installieren
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Kopiere Anwendungscode
+# Anwendungscode kopieren
 COPY app.py .
 COPY templates/ ./templates/
 
-# Erstelle exports Verzeichnis
-RUN mkdir -p exports
+# Verzeichnisse erstellen
+RUN mkdir -p exports logs data
 
-# Exponiere Port
+# Benutzer für Sicherheit erstellen
+RUN groupadd -r appuser && useradd -r -g appuser appuser \
+    && chown -R appuser:appuser /app
+USER appuser
+
+# Port exponieren
 EXPOSE 5000
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
   CMD curl -f http://localhost:5000/api/health || exit 1
 
-# Starte Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "300", "app:app"]
+# Starte Gunicorn mit optimierten Einstellungen
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "300", "--access-logfile", "-", "--error-logfile", "-", "app:app"]

@@ -11,6 +11,7 @@ exports/*.json
 data/exports/*
 data/logs/*
 data/.env
+.env
 !data/exports/.gitkeep
 !data/logs/.gitkeep
 .DS_Store
