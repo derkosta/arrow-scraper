@@ -15,37 +15,48 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
 
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            width: 100%;
-            padding: 40px;
+            overflow: hidden;
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
             font-size: 28px;
-            text-align: center;
+            margin-bottom: 10px;
         }
 
-        .subtitle {
-            color: #666;
-            text-align: center;
-            margin-bottom: 30px;
+        .header p {
+            opacity: 0.9;
             font-size: 14px;
         }
 
+        .content {
+            padding: 30px;
+        }
+
+        .scan-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
@@ -90,21 +101,35 @@
         }
 
         .btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 12px 24px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
-        .btn:hover:not(:disabled) {
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
         }
 
         .btn:disabled {
@@ -178,16 +203,138 @@
             font-size: 14px;
         }
 
+        .results-section {
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .results-title {
+            font-size: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .export-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .product-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #f0f0f0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .product-code {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .product-category {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            display: inline-block;
+        }
+
+        .product-specs {
+            margin-top: 15px;
+        }
+
+        .spec-group {
+            margin-bottom: 10px;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .spec-input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .spec-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
         .download-section {
-            margin-top: 20px;
             text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .download-section.show {
+            display: block;
         }
 
         .download-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #4caf50;
+            background: #28a745;
             color: white;
+            padding: 12px 30px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
@@ -195,98 +342,109 @@
         }
 
         .download-btn:hover {
-            background: #45a049;
+            background: #218838;
         }
 
-        .results {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .results.show {
-            display: block;
-        }
-
-        .result-item {
-            padding: 8px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-label {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .result-value {
-            color: #666;
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .export-controls {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Arrow.it Produktdaten-Extraktor</h1>
-        <p class="subtitle">Extrahieren Sie Produktdaten von Arrow.it und exportieren Sie sie für Shopware 5</p>
-        
-        <form id="extractForm">
-            <div class="form-group">
-                <label for="url">Arrow.it Produkt-URL:</label>
-                <input 
-                    type="text" 
-                    id="url" 
-                    name="url" 
-                    placeholder="https://www.arrow.it/en/assembled/1975/BMW-S-1000-R---M-1000-R-2025"
-                    required
-                />
-                <div class="example-url">
-                    Beispiel: https://www.arrow.it/en/assembled/1749/Honda-CRF-300-L-2021-2024
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="loadSpecs" name="loadSpecs" checked />
-                    <label for="loadSpecs" style="margin-bottom: 0; font-weight: normal;">
-                        Detaillierte Spezifikationen laden (Material, Gewicht, etc.)
-                    </label>
-                </div>
-            </div>
-            
-            <button type="submit" class="btn" id="submitBtn">Produkte extrahieren</button>
-        </form>
-        
-        <div class="status" id="status"></div>
-        
-        <div class="progress" id="progress">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">Lade Produktdaten...</div>
+        <div class="header">
+            <h1>🚀 Arrow.it Produktdaten-Extraktor</h1>
+            <p>Scannen, Bearbeiten und Exportieren von Produktdaten</p>
         </div>
         
-        <div class="results" id="results"></div>
-        
-        <div class="download-section" id="downloadSection" style="display: none;">
-            <a href="#" class="download-btn" id="downloadBtn" download>📥 CSV-Datei herunterladen</a>
+        <div class="content">
+            <!-- Scan Section -->
+            <div class="scan-section">
+                <form id="scanForm">
+                    <div class="form-group">
+                        <label for="url">Arrow.it Produkt-URL:</label>
+                        <input 
+                            type="text" 
+                            id="url" 
+                            name="url" 
+                            placeholder="https://www.arrow.it/en/assembled/1975/BMW-S-1000-R---M-1000-R-2025"
+                            required
+                        />
+                        <div class="example-url">
+                            Beispiel: https://www.arrow.it/en/assembled/1749/Honda-CRF-300-L-2021-2024
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="loadSpecs" name="loadSpecs" checked />
+                            <label for="loadSpecs" style="margin-bottom: 0; font-weight: normal;">
+                                Detaillierte Spezifikationen laden (Material, Gewicht, etc.)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="scanBtn">🔍 Produkte scannen</button>
+                </form>
+                
+                <div class="status" id="status"></div>
+                
+                <div class="progress" id="progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Lade Produktdaten...</div>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <div class="results-title" id="resultsTitle">Produktdaten</div>
+                    <div class="export-controls">
+                        <button class="btn btn-success" id="exportBtn">📥 Als CSV exportieren</button>
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Produkte werden hier dynamisch eingefügt -->
+                </div>
+            </div>
+            
+            <!-- Download Section -->
+            <div class="download-section" id="downloadSection">
+                <a href="#" class="download-btn" id="downloadBtn" download>📥 CSV-Datei herunterladen</a>
+            </div>
         </div>
     </div>
 
     <script>
-        const form = document.getElementById('extractForm');
-        const submitBtn = document.getElementById('submitBtn');
+        const scanForm = document.getElementById('scanForm');
+        const scanBtn = document.getElementById('scanBtn');
         const statusDiv = document.getElementById('status');
         const progressDiv = document.getElementById('progress');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
-        const resultsDiv = document.getElementById('results');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsTitle = document.getElementById('resultsTitle');
+        const productsGrid = document.getElementById('productsGrid');
+        const exportBtn = document.getElementById('exportBtn');
         const downloadSection = document.getElementById('downloadSection');
         const downloadBtn = document.getElementById('downloadBtn');
+
+        let currentProducts = [];
 
         function showStatus(message, type) {
             statusDiv.textContent = message;
@@ -317,7 +475,77 @@
             }
         }
 
-        form.addEventListener('submit', async (e) => {
+        function renderProducts(products) {
+            productsGrid.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-header">
+                        <img src="${product.images[0] || '/static/no-image.png'}" 
+                             alt="${product.name}" 
+                             class="product-image"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRjBGMEYwIi8+CjxwYXRoIGQ9Ik0yMCAyMEg2MFY2MEgyMFYyMFoiIHN0cm9rZT0iI0NDQyIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0zMCAzMEg1MFY1MEgzMFYzMFoiIHN0cm9rZT0iI0NDQyIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPg=='">
+                        <div class="product-info">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-code">Code: ${product.code}</div>
+                            <div class="product-category">${product.category}</div>
+                        </div>
+                    </div>
+                    <div class="product-specs">
+                        <div class="spec-group">
+                            <div class="spec-label">Preis:</div>
+                            <input type="text" class="spec-input" value="${product.price || ''}" 
+                                   data-field="price" data-index="${index}">
+                        </div>
+                        <div class="spec-group">
+                            <div class="spec-label">Material Körper:</div>
+                            <input type="text" class="spec-input" value="${product.specifications.material_body || ''}" 
+                                   data-field="specifications.material_body" data-index="${index}">
+                        </div>
+                        <div class="spec-group">
+                            <div class="spec-label">Material Innen:</div>
+                            <input type="text" class="spec-input" value="${product.specifications.material_inner || ''}" 
+                                   data-field="specifications.material_inner" data-index="${index}">
+                        </div>
+                        <div class="spec-group">
+                            <div class="spec-label">Gewicht:</div>
+                            <input type="text" class="spec-input" value="${product.specifications.weight || ''}" 
+                                   data-field="specifications.weight" data-index="${index}">
+                        </div>
+                        <div class="spec-group">
+                            <div class="spec-label">Zertifizierung:</div>
+                            <input type="text" class="spec-input" value="${product.specifications.certification || ''}" 
+                                   data-field="specifications.certification" data-index="${index}">
+                        </div>
+                        <div class="spec-group">
+                            <div class="spec-label">Kompatibilität:</div>
+                            <input type="text" class="spec-input" value="${product.specifications.compatibility || ''}" 
+                                   data-field="specifications.compatibility" data-index="${index}">
+                        </div>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function updateProductData(index, field, value) {
+            if (field.includes('.')) {
+                const [parent, child] = field.split('.');
+                if (currentProducts[index] && currentProducts[index][parent]) {
+                    currentProducts[index][parent][child] = value;
+                }
+            } else {
+                if (currentProducts[index]) {
+                    currentProducts[index][field] = value;
+                }
+            }
+        }
+
+        // Event Listeners
+        scanForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const url = document.getElementById('url').value.trim();
@@ -334,16 +562,16 @@
             }
             
             // Reset UI
-            submitBtn.disabled = true;
-            downloadSection.style.display = 'none';
-            resultsDiv.classList.remove('show');
+            scanBtn.disabled = true;
+            resultsSection.classList.remove('show');
+            downloadSection.classList.remove('show');
             showProgress(true);
-            showStatus('Starte Extraktion...', 'info');
+            showStatus('Starte Scan...', 'info');
             
             try {
                 updateProgress(50, 'Verarbeite Produktdaten...');
                 
-                const response = await fetch('/api/extract', {
+                const response = await fetch('/api/scan', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -357,39 +585,74 @@
                 const data = await response.json();
                 
                 if (!response.ok) {
-                    throw new Error(data.error || 'Fehler beim Extrahieren der Daten');
+                    throw new Error(data.error || 'Fehler beim Scannen der Daten');
                 }
                 
                 updateProgress(100, 'Fertig!');
-                showStatus(`Erfolgreich! ${data.total_products} Produkte extrahiert.`, 'success');
+                showStatus(`Erfolgreich! ${data.total_products} Produkte gescannt.`, 'success');
                 
-                // Zeige Ergebnisse
-                resultsDiv.innerHTML = `
-                    <div class="result-item">
-                        <span class="result-label">Fahrzeug-ID:</span>
-                        <span class="result-value">${data.vehicle_id}</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Anzahl Produkte:</span>
-                        <span class="result-value">${data.total_products}</span>
-                    </div>
-                    <div class="result-item">
-                        <span class="result-label">Dateiname:</span>
-                        <span class="result-value">${data.filename}</span>
-                    </div>
-                `;
-                resultsDiv.classList.add('show');
-                
-                // Zeige Download-Button
-                downloadBtn.href = data.download_url;
-                downloadSection.style.display = 'block';
+                // Speichere Produkte und zeige sie an
+                currentProducts = data.products;
+                resultsTitle.textContent = `Produktdaten (${data.total_products} Produkte)`;
+                renderProducts(currentProducts);
+                resultsSection.classList.add('show');
                 
             } catch (error) {
                 console.error('Error:', error);
                 showStatus(error.message || 'Ein Fehler ist aufgetreten', 'error');
             } finally {
-                submitBtn.disabled = false;
+                scanBtn.disabled = false;
                 setTimeout(() => showProgress(false), 1000);
+            }
+        });
+
+        // Event Delegation für Input-Änderungen
+        productsGrid.addEventListener('input', (e) => {
+            if (e.target.classList.contains('spec-input')) {
+                const index = parseInt(e.target.dataset.index);
+                const field = e.target.dataset.field;
+                const value = e.target.value;
+                updateProductData(index, field, value);
+            }
+        });
+
+        // Export Button
+        exportBtn.addEventListener('click', async () => {
+            if (currentProducts.length === 0) {
+                showStatus('Keine Produktdaten zum Exportieren', 'error');
+                return;
+            }
+            
+            exportBtn.disabled = true;
+            exportBtn.textContent = 'Exportiere...';
+            
+            try {
+                const response = await fetch('/api/export', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        products: currentProducts
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Fehler beim Exportieren');
+                }
+                
+                downloadBtn.href = data.download_url;
+                downloadSection.classList.add('show');
+                showStatus(`Export erfolgreich! ${data.total_products} Produkte exportiert.`, 'success');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus(error.message || 'Fehler beim Exportieren', 'error');
+            } finally {
+                exportBtn.disabled = false;
+                exportBtn.textContent = '📥 Als CSV exportieren';
             }
         });
 
@@ -398,7 +661,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Server status:', data);
-            showStatus('Bereit zum Extrahieren', 'info');
+                showStatus('Bereit zum Scannen', 'info');
                 setTimeout(() => {
                     document.getElementById('status').classList.remove('show');
                 }, 2000);
@@ -409,4 +672,3 @@
     </script>
 </body>
 </html>
-

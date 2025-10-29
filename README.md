@@ -1,189 +1,132 @@
-# Arrow.it Produktdaten-Extraktor Webportal
+# Arrow.it Produktdaten-Extraktor
 
-Ein Docker-basiertes Webportal zum Extrahieren von Produktdaten von Arrow.it und Exportieren als CSV für Shopware 5.
+Ein modernes Web-Tool zum Scannen, Bearbeiten und Exportieren von Produktdaten von Arrow.it.
 
-## Features
+## 🚀 Features
 
-- 🌐 Einfaches Web-Interface zur Eingabe von Arrow.it URLs
-- 🔄 Direkter Zugriff auf die Arrow.it API (schnell und zuverlässig)
-- 📊 Export als Shopware 5-kompatible CSV-Datei
-- 🐳 Docker-basiert, läuft auf Synology NAS
-- 📦 Automatische Extraktion von Produktspezifikationen
-- 🔗 Produktabhängigkeiten werden automatisch erkannt
+- **🔍 Produkt-Scanner**: Automatisches Extrahieren von Produktdaten aus Arrow.it URLs
+- **👁️ Vorschau**: Übersichtliche Darstellung aller gesammelten Informationen
+- **🖼️ Bilder**: Hotlinked Produktbilder direkt in der Ansicht
+- **✏️ Bearbeitung**: Inline-Bearbeitung aller Produktdaten vor dem Export
+- **📥 CSV-Export**: Export der bearbeiteten Daten als CSV-Datei
+- **🐳 Docker**: Einfache Bereitstellung mit Docker Compose
+- **📱 Responsive**: Optimiert für Desktop und Mobile
 
-## Installation auf Synology NAS
+## 🎯 Verwendung
 
-### Voraussetzungen
+1. **URL eingeben**: Arrow.it Produkt-URL in das Eingabefeld einfügen
+2. **Scannen**: Auf "Produkte scannen" klicken
+3. **Vorschau**: Alle Produktdaten werden übersichtlich angezeigt
+4. **Bearbeiten**: Daten direkt in der Ansicht anpassen
+5. **Exportieren**: Als CSV-Datei herunterladen
 
-- Synology NAS mit Docker Package installiert
-- Docker Compose (meist bereits enthalten)
+## 🛠️ Installation
 
-### Schritt 1: Dateien hochladen
-
-Laden Sie alle Projektdateien auf Ihr Synology NAS hoch, z.B. in:
-```
-/docker/arrow-scraper/
-```
-
-### Schritt 2: Docker Container starten
-
-1. Öffnen Sie Docker in der Synology DSM
-2. Navigieren Sie zu "Container" > "Image" > "Erstellen"
-3. Wählen Sie "docker-compose.yml" aus dem Projektverzeichnis
-4. Klicken Sie auf "Erstellen"
-
-Oder über SSH:
+### Docker (Empfohlen)
 
 ```bash
-cd /docker/arrow-scraper
+# Repository klonen
+git clone https://github.com/derkosta/arrow-scraper.git
+cd arrow-scraper
+
+# Container starten
 docker-compose up -d
 ```
 
-### Schritt 3: Webportal aufrufen
+### Lokale Installation
 
-Öffnen Sie in Ihrem Browser:
+```bash
+# Abhängigkeiten installieren
+pip install -r requirements.txt
+
+# Anwendung starten
+python app.py
 ```
-http://[IHR-NAS-IP]:5000
-```
 
-## Verwendung
+## 🌐 Zugriff
 
-1. Öffnen Sie das Webportal
-2. Kopieren Sie eine Arrow.it Produkt-URL, z.B.:
-   ```
-   https://www.arrow.it/en/assembled/1975/BMW-S-1000-R---M-1000-R-2025
-   ```
-3. Fügen Sie die URL in das Eingabefeld ein
-4. (Optional) Aktivieren/deaktivieren Sie "Detaillierte Spezifikationen laden"
-5. Klicken Sie auf "Produkte extrahieren"
-6. Warten Sie, bis die Extraktion abgeschlossen ist
-7. Laden Sie die CSV-Datei herunter
+- **Web-Interface**: http://localhost:8080
+- **Health Check**: http://localhost:8080/api/health
 
-## Exportierte Daten
-
-Die CSV-Datei enthält folgende Felder:
-
-- `ordernumber` - Artikelnummer (SKU)
-- `name` - Produktname
-- `description` - Beschreibung
-- `supplier` - Lieferant (Arrow)
-- `tax` - Steuersatz (19%)
-- `price` - Verkaufspreis (muss manuell ausgefüllt werden)
-- `active` - Aktiv (1=ja, 0=nein)
-- `instock` - Lagerbestand (muss manuell ausgefüllt werden)
-- `categories` - Kategorien
-- `propertyGroup1-8` / `propertyValue1-8` - Produkteigenschaften
-- `weight` - Gewicht
-- `requires` - Benötigte Artikel (kommagetrennt)
-- `optional` - Optionale Artikel (kommagetrennt)
-
-### Produkteigenschaften
-
-1. **Produkttyp**: Silencers, Mid-pipes, Collectors
-2. **Material Körper**: Aluminium, Titan, Edelstahl
-3. **Material Innen**: Edelstahl
-4. **Zertifizierung**: ECE, Euro4, Racing
-5. **Kompatibel mit**: Thunder/X-Kone silencers
-6. **DB-Killer**: Si/No
-7. **Lambda-Sonde**: Si/No
-8. **CO-Sonde**: Si/No
-
-## Shopware 5 Import
-
-1. Öffnen Sie die CSV-Datei in Excel oder einem CSV-Editor
-2. Füllen Sie folgende Felder aus:
-   - `price` - Verkaufspreise
-   - `instock` - Lagerbestände
-   - `categories` - Shopware-Kategorien
-3. Importieren Sie die CSV in Shopware:
-   - Einstellungen → Import/Export
-   - Artikelprofil auswählen
-   - CSV-Datei hochladen
-   - Spalten zuordnen (sollte automatisch funktionieren)
-   - Import starten
-
-## Verzeichnisstruktur
+## 📁 Projektstruktur
 
 ```
 arrow-scraper/
-├── app.py                 # Flask Backend
-├── requirements.txt       # Python Abhängigkeiten
-├── Dockerfile            # Docker Image Definition
-├── docker-compose.yml    # Docker Compose Konfiguration
+├── app.py                 # Hauptanwendung
 ├── templates/
-│   └── index.html        # Frontend Web-Interface
-└── exports/              # Exportierte CSV-Dateien (wird automatisch erstellt)
+│   └── index.html        # Web-Interface
+├── docker-compose.yml    # Docker-Konfiguration
+├── Dockerfile           # Container-Definition
+├── requirements.txt     # Python-Abhängigkeiten
+├── env.example         # Umgebungsvariablen-Vorlage
+├── setup-synology.sh   # Synology Setup-Script
+├── fix-permissions.sh  # Berechtigungs-Fix-Script
+└── SYNOLOGY_SETUP.md   # Synology-Anleitung
 ```
 
-## API Endpunkte
+## 🔧 API-Endpunkte
 
-### POST /api/extract
-Extrahiert Produktdaten von einer Arrow.it URL.
+- `POST /api/scan` - Produktdaten scannen
+- `POST /api/export` - Bearbeitete Daten exportieren
+- `GET /api/download/<filename>` - CSV-Datei herunterladen
+- `GET /api/health` - Status prüfen
 
-**Request:**
-```json
-{
-  "url": "https://www.arrow.it/en/assembled/1975/...",
-  "load_specifications": true
-}
+## 🐳 Docker-Konfiguration
+
+### Umgebungsvariablen
+
+```env
+FLASK_ENV=production
+DEBUG=false
+WEB_HOST=0.0.0.0
+WEB_PORT=5000
+LOG_LEVEL=INFO
+TZ=Europe/Berlin
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "vehicle_id": 1975,
-  "total_products": 15,
-  "filename": "arrow_vehicle_1975_20241201_143022.csv",
-  "download_url": "/api/download/arrow_vehicle_1975_20241201_143022.csv"
-}
+### Volumes
+
+- `./data/exports` → Exportierte CSV-Dateien
+- `./data/logs` → Log-Dateien
+- `./data` → Allgemeine Daten
+
+## 📋 Beispiel-URLs
+
+```
+https://www.arrow.it/en/assembled/1749/Honda-CRF-300-L-2021-2024
+https://www.arrow.it/en/assembled/1975/BMW-S-1000-R---M-1000-R-2025
+https://www.arrow.it/en/assembled/1970/Ducati-Panigale-V2---V2S-2025
 ```
 
-### GET /api/download/<filename>
-Lädt eine exportierte CSV-Datei herunter.
+## 🔒 Sicherheit
 
-### GET /api/health
-Health Check Endpunkt.
+- Container läuft mit eingeschränkten Berechtigungen
+- Keine sensiblen Daten in Logs
+- Input-Validierung für alle API-Endpunkte
 
-## Fehlerbehebung
+## 🚀 Synology DSM
 
-### Container startet nicht
-- Überprüfen Sie, ob Port 5000 bereits belegt ist
-- Ändern Sie den Port in `docker-compose.yml` falls nötig
+Für Synology NAS-Systeme siehe [SYNOLOGY_SETUP.md](SYNOLOGY_SETUP.md)
 
-### Keine Produkte gefunden
-- Überprüfen Sie, ob die URL korrekt ist
-- Stellen Sie sicher, dass die URL das Format `/assembled/{ID}/` enthält
+## 📝 Lizenz
 
-### Timeout-Fehler
-- Erhöhen Sie den Timeout in `Dockerfile` (Zeile: `--timeout 300`)
-- Bei vielen Produkten kann die Extraktion länger dauern
+MIT License
 
-## Technische Details
+## 🤝 Beitragen
 
-- **Backend**: Flask mit Gunicorn
-- **API**: Arrow.it REST API
-- **Datenformat**: CSV mit Semikolon-Trennung (Shopware 5 kompatibel)
-- **Encoding**: UTF-8
+1. Fork des Repositories
+2. Feature-Branch erstellen
+3. Änderungen committen
+4. Pull Request erstellen
 
-## Sicherheit
+## 📞 Support
 
-- Das Webportal läuft nur im lokalen Netzwerk
-- Keine Authentifizierung erforderlich (nur für lokalen Gebrauch)
-- Bei Bedarf kann eine Authentifizierung hinzugefügt werden
+Bei Problemen oder Fragen:
+1. GitHub Issues erstellen
+2. Logs prüfen: `docker logs arrow-scraper`
+3. Dokumentation durchgehen
 
-## Updates
+---
 
-Um auf die neueste Version zu aktualisieren:
-
-```bash
-cd /docker/arrow-scraper
-docker-compose down
-docker-compose pull
-docker-compose up -d
-```
-
-## Lizenz
-
-Dieses Tool wurde für den persönlichen Gebrauch entwickelt. Die Produktdaten gehören Arrow Special Parts.
-
+**Version**: 2.0.0  
+**Letzte Aktualisierung**: $(date +%Y-%m-%d)
