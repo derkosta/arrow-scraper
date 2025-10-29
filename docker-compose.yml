@@ -17,8 +17,6 @@ services:
       - /volume1/docker/arrow_scraper/data:/app/data
       - /volume1/docker/arrow_scraper/.env:/app/.env:ro
 
-    env_file:
-      - /volume1/docker/arrow_scraper/.env
 
     environment:
       - DATABASE_PATH=/app/data/arrow_scraper.db
